@@ -1,5 +1,5 @@
 <template>
-  <div style="margin:40px 0">
+  <div style="margin: 40px 0">
     <el-carousel :interval="4000" type="card" height="400px">
       <el-carousel-item v-for="item in 6" :key="item">
         <h3 text="2xl" justify="center">这里发图{{ item }}</h3>
@@ -10,7 +10,13 @@
     <p style="font-size: 22px; font-weight: bold; margin-bottom: 5px">为你推荐：</p>
     <el-row :gutter="24">
       <el-col :span="4" v-for="(book, index) in books" :key="index">
-        <img :src="book.cover" alt="Book Cover" class="book-cover" />
+        <img
+          style="cursor: pointer"
+          @click="gotoDetail"
+          :src="book.cover"
+          alt="Book Cover"
+          class="book-cover"
+        />
         <div class="book-info">
           <p class="book-author">{{ book.author }}</p>
           <p class="book-price" style="color: red">{{ book.price }}</p>
@@ -23,117 +29,23 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import router from '@/router'
+
+const gotoDetail = () => {
+  router.push({
+    path: '/bookdetail',
+    // query: { bookId: 1 }
+  })
+}
 
 const books = ref([
-     {
+  {
     cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
+    author: '生命中所有的灿烂都将用寂寞来偿还',
+    price: '￥100',
     rate: 4
   },
   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }, {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }, {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }, {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }, {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }, {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }, {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-   {
     cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
     author: 'zzy',
     price: '10元',
@@ -145,6 +57,114 @@ const books = ref([
     price: '10元',
     rate: 4
   },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  }
 ])
 </script>
 
@@ -168,7 +188,7 @@ const books = ref([
 .book-list-container {
   padding: 20px 250px 0 250px;
   min-height: 300px;
-//   background: #f0f0f0;
+  //   background: #f0f0f0;
   // background-color: gray;
 }
 

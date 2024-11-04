@@ -1,8 +1,7 @@
 <template>
   <div class="search-list-container">
-    <p style="font-size:22px;font-weight:bold;margin-bottom:5px">搜索结果:</p>
     <el-row :gutter="24">
-      <el-col :span="3" v-for="(book, index) in books" :key="index">
+      <el-col :span="6" v-for="(book, index) in books" :key="index">
         <img :src="book.cover" alt="Book Cover" class="book-cover" />
         <div class="book-info">
           <p class="book-author">{{ book.author }}</p>
@@ -145,13 +144,12 @@ const books = ref([
     rate: 4
   }
 ])
+
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-list-container {
-  margin: 20px 200px 0 200px;
-  min-height: 300px;
-//   background-color: gray;
+  width: 80%;
 }
 
 .book-cover {
@@ -161,6 +159,7 @@ const books = ref([
 
 .book-info {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .book-author,
