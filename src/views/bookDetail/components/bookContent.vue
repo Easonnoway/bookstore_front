@@ -14,7 +14,7 @@
         <el-button>加入购物车</el-button>
         <br /><br />
         <p style="font-weight: bold; margin-bottom: 20px">
-          店铺：<a style="cursor: pointer">张梓延的店铺</a>
+          店铺：<a style="cursor: pointer" @click="gotoStroe">张梓延的店铺</a>
         </p>
         <p class="book-number">该店铺库存量：{{ bookContent.freeNumber }}</p>
       </div>
@@ -37,6 +37,7 @@ import { ref } from 'vue'
 import relatedList from './relatedList.vue'
 import commentArea from './commentArea.vue'
 import { onMounted } from 'vue'
+import router from '@/router'
 
 const bookContent = ref({
   imgSrc: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
@@ -46,6 +47,11 @@ const bookContent = ref({
   rate: 4,
   freeNumber: 999
 })
+
+const gotoStroe = () => {
+  router.push('/bookstore')
+}
+
 </script>
 
 <style scoped>

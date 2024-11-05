@@ -10,6 +10,10 @@
                 <input type="password" name="" required="">
                 <label>Password</label>
             </div>
+            <div class="user-box">
+                <input type="text" name="" required="">
+                <label>Phone</label>
+            </div>
         </form>
         <div class="button-container">
             <el-button>注册</el-button>

@@ -27,6 +27,16 @@ const router = createRouter({
       path: '/bookdetail',
       name: 'bookdeTail',
       component: () => import('../views/bookDetail/index.vue')
+    },
+    {
+      path: '/bookstore',
+      name: 'bookStore',
+      component: () => import('../views/sellerStore/index.vue')
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: () => import('../views/orderPage/index.vue')
     }
   ]
 })

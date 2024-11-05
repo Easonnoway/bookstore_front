@@ -1,29 +1,29 @@
 <template>
-  <div class="detail-header">
+  <div class="store-header">
     <el-page-header @back="goBack" title="返回上一页">
       <template #breadcrumb>
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: './' }"> 主页 </el-breadcrumb-item>
           <el-breadcrumb-item>书籍详情 </el-breadcrumb-item>
+          <el-breadcrumb-item>店铺详情 </el-breadcrumb-item>
         </el-breadcrumb>
       </template>
       <template #content>
         <span style="color: #65676b; font-weight: 600" class="text-large font-600 mr-3">
-          生命中所有的灿烂都将用寂寞来偿还
+          张梓延的店铺
         </span>
       </template>
     </el-page-header>
   </div>
-  <div class="book-detail-container">
-    <book-content />
+  <div class="book-store-container">
+    <store-content />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import router from '@/router'
-import bookContent from './components/bookContent.vue'
-
+import storeContent from './components/storeContent.vue'
 const goBack = () => {
   router.go(-1)
 }
@@ -35,7 +35,7 @@ const goBack = () => {
   padding: 0;
   box-sizing: border-box;
 }
-.detail-header {
+.store-header {
   position: fixed;
   padding: 10px 0 10px 30px;
   width: 100%;
@@ -46,12 +46,12 @@ const goBack = () => {
   z-index: 999;
   background-color: #fff;
 }
-.book-detail-container {
+.book-store-container {
   position: absolute;
-  top: 80px;
-  min-height: calc(100% - 80px);
-  left: calc(50% - 600px); 
-  width: 1200px;
-  background-color: #eef4f5;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 60px);
+  background: #f0f0f0;
 }
 </style>

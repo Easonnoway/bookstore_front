@@ -1,7 +1,7 @@
 <template>
-  <div class="search-list-container">
+  <div class="book-list-container">
     <el-row :gutter="24">
-      <el-col :span="6" v-for="(book, index) in books" :key="index">
+      <el-col :span="4" v-for="(book, index) in books" :key="index">
         <img :src="book.cover" alt="Book Cover" class="book-cover" />
         <div class="book-info">
           <p class="book-author">{{ book.author }}</p>
@@ -15,7 +15,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
 const books = ref([
   {
     cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
@@ -147,8 +146,8 @@ const books = ref([
 </script>
 
 <style lang="scss" scoped>
-.search-list-container {
-  width: 80%;
+.book-list-container {
+    padding: 30px 30px 0 30px;
 }
 
 .book-cover {
