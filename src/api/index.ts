@@ -1,4 +1,3 @@
-
 import user from './user'
 
 class API {
@@ -8,5 +7,12 @@ class API {
   }
 }
 
-// 导出使用
-export default new API()
+const apiInstance = new API()
+
+// 自定义组合式函数，用于在组件中访问全局API
+export const useApi = () => {
+  return apiInstance
+}
+
+// 导出API实例
+export default apiInstance

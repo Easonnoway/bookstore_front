@@ -1,12 +1,12 @@
 import axios from '../request' // axios 实例引入（第五节封装的）
 
 const user = {
-// 登录
-  loginUser: (data:any) =>
+  // 登录
+  loginUser: (data: any) =>
     axios({
-      url: ``,
+      url: `/login`,
       method: 'post',
-      data,
+      data
     })
 }
 
