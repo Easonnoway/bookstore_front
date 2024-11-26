@@ -1,6 +1,6 @@
 <template>
-  <div style="margin: 40px 0">
-    <el-carousel :interval="4000" type="card" height="400px">
+  <div style="margin: 40px 20px">
+    <el-carousel :interval="3000" type="card" height="400px">
       <el-carousel-item v-for="item in 6" :key="item">
         <h3 text="2xl" justify="center">这里发图{{ item }}</h3>
       </el-carousel-item>
@@ -164,6 +164,24 @@ const books = ref([
     author: 'zzy',
     price: '10元',
     rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
+  },
+  {
+    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
+    author: 'zzy',
+    price: '10元',
+    rate: 4
   }
 ])
 </script>
@@ -179,10 +197,12 @@ const books = ref([
 
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
+  border-radius: 20px;
 }
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+  border-radius: 20px;
 }
 
 .book-list-container {

@@ -1,26 +1,17 @@
 <template>
-  <el-dialog
-    title="编辑用户信息"
-    v-model="dialogVisible"
-    width="30%"
-    :before-close="handleClose"
-  >
-    <el-form  label-width="80px">
+  <el-dialog title="编辑用户信息" v-model="dialogVisible" width="30%" :before-close="handleClose">
+    <el-form label-width="80px">
       <el-form-item label="姓名">
-        <el-input ></el-input>
+        <el-input></el-input>
       </el-form-item>
       <el-form-item label="头像">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-        >
+        <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false">
           <!-- <img v-if="" :src="user.avatar" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
         </el-upload>
       </el-form-item>
       <el-form-item label="个人简介">
-        <el-input type="textarea"></el-input>
+        <el-input type="textarea" :resize="'none'"></el-input>
       </el-form-item>
     </el-form>
     <template v-slot:footer>
