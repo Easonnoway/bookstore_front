@@ -9,19 +9,19 @@
           <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" alt="Profile Picture" />
         </div>
         <div class="profile-info">
-          <h1 class="profile-id">Easonnoway</h1>
-          <p class="profile-name">用户</p>
+          <h1 class="profile-id">{{ userInfo.username }}</h1>
+          <p class="profile-name">{{ userInfo.name }}</p>
           <div class="profile-stats">
             <div class="stat">
-              <div class="stat-value">0</div>
+              <div class="stat-value">{{ userInfo.shoppingCart }}</div>
               <div class="stat-label">购物车</div>
             </div>
             <div class="stat">
-              <div class="stat-value">0</div>
+              <div class="stat-value">{{ userInfo.comments }}</div>
               <div class="stat-label">评论过</div>
             </div>
             <div class="stat">
-              <div class="stat-value">0</div>
+              <div class="stat-value">{{ userInfo.favorites }}</div>
               <div class="stat-label">收藏过</div>
             </div>
           </div>
@@ -29,27 +29,31 @@
       </div>
       <h3>个人简介：</h3>
       <div class="joined-date">
-        <p>这个人很懒，什么都没有留下。</p>
+        <p>{{ userInfo.bio }}</p>
       </div>
       <h3>地址：</h3>
-      <div class="joined-date">
-        <span class="material-icons" style="vertical-align: middle; font-size: 16px">event</span>
-        Joined November 2024
+      <div class="joined-date" v-for="address in userInfo.addresses" :key="address">
+        <span class="material-icons" style="vertical-align: middle; font-size: 16px">{{ address }}</span>
       </div>
       <div class="profile-actions">
-        <a href="#" class="action-link">+ 添加地址</a>
+        <a href="#" class="action-link" @click="addAddressDialogVisible = true">+ 添加地址</a>
       </div>
     </div>
   </div>
   <edit-dialog :editDialogVisible="editDialogVisible" @update:editDialogVisible="editDialogVisible = $event" />
+  <add-address-dialog :addAddressDialogVisible="addAddressDialogVisible"
+    @update:addAddressDialogVisible="addAddressDialogVisible = $event" />
 </template>
 
 <script setup>
 import editDialog from './components/editDialog.vue';
-import { ref } from 'vue';
+import addAddressDialog from './components/addAddressDialog.vue';
+import { ref, onMounted, provide } from 'vue';
 import { useRouter } from 'vue-router';
+// import { useApi } from '@/api'
 
 let editDialogVisible = ref(false);
+let addAddressDialogVisible = ref(false);
 const router = useRouter();
 
 function goToHomePage() {
@@ -59,6 +63,26 @@ function goToHomePage() {
 function logout() {
   router.push({ path: '/logIn' });
 }
+
+onMounted(() => {
+  eventBus.on('updateAddress', (data) => {
+    userInfo.value.addresses.push(data)
+  })
+})
+
+const userInfo = ref({
+  username: 'Easonnoway',
+  customerType: '用户',
+  shoppingCart: 0,
+  comments: 0,
+  favorites: 0,
+  bio: '这个人很懒，什么都没有留下。',
+  addresses: ['地址1', '地址2', '地址3']
+});
+
+// function addAddress(address) {
+//   userInfo.value.addresses.push(address);
+// }
 </script>
 
 <style scoped>
