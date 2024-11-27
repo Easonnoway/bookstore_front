@@ -15,136 +15,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { defineProps } from 'vue'
+import { useApi } from '@/api';
+const props = defineProps<{
+  query: string
+}>()
 
-const books = ref([
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: '生命中所有的灿烂都将用寂寞来偿还',
-    price: '￥100',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    author: 'zzy',
-    price: '10元',
-    rate: 4
-  }
-])
+onMounted(async() => {
+  const res = await useApi().getSearchBooks(props.query)
+})  
+
+const books = ref([])
 </script>
 
 <style lang="scss">

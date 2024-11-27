@@ -57,7 +57,8 @@ const signup = async () => {
       profilePhoto: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
       identity: 1
     })
-    console.log('注册成功:', response)
+      console.log('注册成功:', response)
+    
     router.push('/login') // 注册成功后跳转到登录页面
   } catch (error) {
     console.error('注册失败:', error)

@@ -17,7 +17,12 @@
     </el-menu>
   </div>
   <div class="search-container">
-    <el-input placeholder="搜索" :suffix-icon="Search"></el-input>
+    <el-input
+      v-model="searchQuery"
+      placeholder="搜索"
+      :suffix-icon="Search"
+      @keyup.enter="handleSearch"
+    ></el-input>
   </div>
   <div class="user-container">
     <span class="text-large font-600 mr-3"> Easonnoway </span>
@@ -51,6 +56,8 @@ const activeIndex = ref(
             ? '3'
             : '0'
 )
+const searchQuery = ref('')
+
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -58,8 +65,15 @@ const handleSelect = (key: string, keyPath: string[]) => {
 const handleOrderClick = () => {
   router.push('/order')
 }
+
 const handleUserInfo = () => {
   router.push('/userInfo')
+}
+
+const handleSearch = () => {
+  if (searchQuery.value) {
+    router.push({ path: '/', query: { q: searchQuery.value } })
+  }
 }
 </script>
 
