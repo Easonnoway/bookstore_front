@@ -19,9 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 import bookList from './bookList.vue'
 import bookTable from './bookTable.vue'
+import { useApi } from '@/api'
+const api = useApi()
 const iscoustomer = ref(false)
 const store = ref({
   avatar: 'https://example.com/store-avatar.jpg',
@@ -29,6 +31,20 @@ const store = ref({
   owner: '张梓延',
   bookCount: 120
 })
+const getStoreInfo = async () => {
+  // 获取店铺信息
+  store.value = await api.store.getStoreInfo({id:2})
+}
+onMounted(async() => {
+  const role = localStorage.getItem('identity')
+  if (role === '1') {
+    iscoustomer.value = true
+  }
+  else if(role === '2'){
+    iscoustomer.value = false
+    await getStoreInfo()
+  }
+})  
 </script>
 
 <style scoped>
