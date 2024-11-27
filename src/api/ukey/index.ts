@@ -1,13 +1,23 @@
-import axios from '../request' // axios 实例引入（第五节封装的）
+import axios from '../request' // 引入封装好的 axios 实例
 
-// axios.defaults.baseURL = 'http://127.0.0.1:2300'
+const customBaseURL = 'http://127.0.0.1:2300' // 自定义的 baseURL
 
 const ukey = {
+  // 检查U盾状态
+  checkUsbKeyStatus: (data: any) =>
+    axios({
+      url: `/api/VerifyUserPIN`,
+      method: 'get',
+      baseURL: customBaseURL, // 设置自定义 baseURL
+      data
+    }),
+
   // 读取用户名
   getUserName: (data: any) =>
     axios({
       url: `/api/GetUserName`,
       method: 'get',
+      baseURL: customBaseURL, // 设置自定义 baseURL
       data
     }),
 
@@ -16,6 +26,7 @@ const ukey = {
     axios({
       url: `/api/WriteUserName`,
       method: 'get',
+      baseURL: customBaseURL, // 设置自定义 baseURL
       data
     }),
 
@@ -24,6 +35,7 @@ const ukey = {
     axios({
       url: `/api/GetSerialNumber`,
       method: 'get',
+      baseURL: customBaseURL, // 设置自定义 baseURL
       data
     }),
 
@@ -32,6 +44,7 @@ const ukey = {
     axios({
       url: `/api/GetECCSignData`,
       method: 'get',
+      baseURL: customBaseURL, // 设置自定义 baseURL
       data
     }),
 
@@ -40,6 +53,7 @@ const ukey = {
     axios({
       url: `/api/GetECCSignData`,
       method: 'get',
+      baseURL: customBaseURL, // 设置自定义 baseURL
       data
     })
 }
