@@ -3,7 +3,7 @@
     <top-menu />  
   </div>
   <div class="content-container">
-    <search-list v-if="searchIndex === true" />
+    <search-list v-if="searchIndex" />
     <book-list v-else />
   </div>
 </template>

@@ -1,12 +1,15 @@
 import user from './user'
 import ukey from './ukey'
+import home from './home'
 
 class API {
   user: any
   ukey: any
+  home: any
   constructor() {
     this.user = user
     this.ukey = ukey
+    this.home = home
   }
 }
 

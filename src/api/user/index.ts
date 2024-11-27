@@ -15,6 +15,14 @@ const user = {
       method: 'post',
       data
     }),
+  
+  // 修改用户信息
+  updateUser: (data: any) =>
+    axios({
+      url: `/customer/alter`,
+      method: 'put',
+      data
+    })
 }
 
 export default user
