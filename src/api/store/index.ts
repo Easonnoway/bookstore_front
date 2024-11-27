@@ -62,13 +62,6 @@ const store = {
       data
     }),
 
-  //根据书店id查询书籍
-  getStoreInfo: (bookshopId: string) =>
-    axios({
-      url: `/api/merchant/bookshop/${bookshopId}`,
-      method: 'get'
-    }),
-
   // 根据id查询图书信息
   getBookInfo: (id: string) =>
     axios({
@@ -97,7 +90,7 @@ const store = {
       url: `/api/merchant/orders`,
       method: 'get',
       params: { accountNumber }
-    })
+    }),
 }
 
 export default store

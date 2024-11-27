@@ -22,6 +22,14 @@ const user = {
       url: `/customer/alter`,
       method: 'put',
       data
+    }),
+  
+  // 新增用户地址
+  updateUserAddress: (data: any) =>
+    axios({
+      url: `/customer/address`,
+      method: 'post',
+      data
     })
 }
 
