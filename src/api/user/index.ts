@@ -7,7 +7,14 @@ const user = {
       url: `/login`,
       method: 'post',
       data
-    })
+    }),
+  
+  registerUser: (data: any) => 
+    axios({
+      url: `/register`,
+      method: 'post',
+      data
+    }),
 }
 
 export default user

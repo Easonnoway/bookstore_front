@@ -36,7 +36,7 @@ const login = async () => {
       password: password.value
     })
     console.log('登录成功:', response)
-    router.push('/home') // 登录成功后跳转到主页
+    router.push('/') // 登录成功后跳转到主页
   } catch (error) {
     console.error('登录失败:', error)
   }

@@ -22,7 +22,7 @@
 import { ref } from 'vue'
 import bookList from './bookList.vue'
 import bookTable from './bookTable.vue'
-const iscoustomer = ref(true)
+const iscoustomer = ref(false)
 const store = ref({
   avatar: 'https://example.com/store-avatar.jpg',
   name: '张梓延的书店',
