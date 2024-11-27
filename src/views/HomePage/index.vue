@@ -1,6 +1,6 @@
 <template>
   <div class="home-header">
-    <top-menu />  
+    <top-menu />
   </div>
   <div class="content-container">
     <search-list :query="query" v-if="searchIndex === true" />
@@ -12,7 +12,7 @@
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-import topMenu from '../common/topMenu.vue';
+import topMenu from '../common/topMenu.vue'
 import bookList from './components/bookList.vue'
 import searchList from './components/searchList.vue'
 

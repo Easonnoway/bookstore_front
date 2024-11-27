@@ -2,7 +2,7 @@
   <el-dialog title="编辑用户信息" v-model="dialogVisible" width="30%" :before-close="handleClose">
     <el-form label-width="80px">
       <el-form-item label="姓名">
-        <el-input></el-input>
+        <el-input v-model="username"></el-input>
       </el-form-item>
       <el-form-item label="头像">
         <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false">
@@ -10,9 +10,9 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
         </el-upload>
       </el-form-item>
-      <el-form-item label="个人简介">
-        <el-input type="textarea" :resize="'none'"></el-input>
-      </el-form-item>
+      <!-- <el-form-item label="个人简介">
+        <el-input type="textarea" :resize="'none'" v-model="biography"></el-input>
+      </el-form-item> -->
     </el-form>
     <template v-slot:footer>
       <div class="dialog-footer">
@@ -25,6 +25,7 @@
 
 <script lang="ts" setup>
 import { defineProps, ref, watch, defineEmits } from 'vue'
+import { useApi } from '@/api'
 
 const props = defineProps({
   editDialogVisible: {
@@ -32,6 +33,8 @@ const props = defineProps({
     required: true
   }
 })
+
+const username = ref('')  
 
 const emit = defineEmits(['update:editDialogVisible'])
 
@@ -53,7 +56,24 @@ const closeDialog = () => {
   dialogVisible.value = false
 }
 
-const saveUserInfo = () => {
+const api = useApi()
+
+const saveUserInfo = async () => {
+  try {
+    const response = await api.user.updateUser({
+      accountNumber: '',
+      username: username.value,
+      password: '',
+      phoneNumber: '',
+      email: '',
+      profilePhoto: '',
+      identiy: ''
+    })
+    console.log('用户信息更新成功', response)
+    closeDialog()
+  } catch (error) {
+    console.log('用户信息更新失败', error)
+  }
   console.log('save user info')
 }
 </script>
