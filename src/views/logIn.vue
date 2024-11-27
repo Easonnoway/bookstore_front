@@ -3,8 +3,8 @@
     <h2>Login</h2>
     <form @submit.prevent="login">
       <div class="user-box">
-        <input type="text" v-model="username" required />
-        <label>Username</label>
+        <input type="text" v-model="accountNumber" required />
+        <label>accountNumber</label>
       </div>
       <div class="user-box">
         <input type="password" v-model="password" required />
@@ -24,7 +24,7 @@ import { useRouter } from 'vue-router'
 import { useApi } from '@/api' // 引入自定义组合式函数
 
 const router = useRouter()
-const username = ref('')
+const accountNumber = ref('')
 const password = ref('')
 
 const api = useApi() // 使用自定义组合式函数获取全局API
@@ -32,10 +32,11 @@ const api = useApi() // 使用自定义组合式函数获取全局API
 const login = async () => {
   try {
     const response = await api.user.loginUser({
-      username: username.value,
+      accountNumber: accountNumber.value,
       password: password.value
     })
     console.log('登录成功:', response)
+     localStorage.setItem('user', JSON.stringify(response.data))
     router.push('/') // 登录成功后跳转到主页
   } catch (error) {
     console.error('登录失败:', error)

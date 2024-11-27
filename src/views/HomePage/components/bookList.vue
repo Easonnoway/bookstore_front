@@ -1,8 +1,8 @@
 <template>
   <div style="margin: 40px 20px">
     <el-carousel :interval="3000" type="card" height="400px">
-      <el-carousel-item v-for="item in 6" :key="item">
-        <h3 text="2xl" justify="center">这里发图{{ item }}</h3>
+      <el-carousel-item v-for="(item, index) in carouselItems" :key="index">
+        <img :src="item" alt="Carousel Image" class="carousel-image" />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -30,22 +30,33 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import router from '@/router'
-import {useApi} from '@/api'
+import { useApi } from '@/api'
 
 const api = useApi()
 
-onMounted(async() => {
-  response = await api.home.getRecommendBook()
-  console.log(response)
+const carouselItems = ref<string[]>([
+  'https://img61.ddimg.cn/picc/24PCx675x1125xXF.jpg',
+  'https://img60.ddimg.cn/picc/24PCx675x1125xPSY.jpg',
+  'https://img62.ddimg.cn/picc/24PCx675x1125xMSK.jpg',
+  'https://img60.ddimg.cn/picc/24PCx675x1125xMW.jpg'
+])
+const books = ref<any[]>([])
+
+onMounted(async () => {
+  try {
+    const response = await api.home.getRecommendBook()
+    books.value = response.data.books
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
 })
+
 const gotoDetail = () => {
   router.push({
-    path: '/bookdetail',
+    path: '/bookdetail'
     // query: { bookId: 1 }
   })
 }
-
-const books = ref([])
 </script>
 
 <style lang="scss">
@@ -67,11 +78,15 @@ const books = ref([])
   border-radius: 20px;
 }
 
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .book-list-container {
   padding: 20px 250px 0 250px;
   min-height: 300px;
-  //   background: #f0f0f0;
-  // background-color: gray;
 }
 
 .book-cover {

@@ -58,7 +58,9 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { useApi } from '@/api'
+const api = useApi()
 
 interface Book {
   cover: string
@@ -67,6 +69,32 @@ interface Book {
   price: number
   stock: number
   description: string
+}
+
+onMounted(async () => {
+  // try {
+  //   const response = await api.store.getBooks()
+  //   books.value = response.data.books
+  // } catch (error) {
+  //   console.error('Error fetching data:', error)
+  // }
+})
+
+const changeBookInfo = async (book: Book) => {
+  try {
+    await api.store.updateBookInfo({
+      bookId: 2,
+      bookName: 'afdfddffffffff',
+      bookIntro: 'asdjaksdjajdkasdj',
+      price: 20.0,
+      author: 'danding',
+      stockQuantity: 500,
+      bookshopId: 2,
+      profilePhoto: 'hasjdhjd.sadak'
+    })
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
 }
 
 const books = reactive<Book[]>([
