@@ -5,7 +5,7 @@ import UKey from './views/ukey.vue'
 
 <template>
   <RouterView :key="$route.fullPath"/>
-  <UKey />
+  <UKey style="z-index: 9999;"/>
 </template>
 
 <style scoped>

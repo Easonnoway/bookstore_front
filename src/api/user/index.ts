@@ -8,20 +8,20 @@ const user = {
       method: 'post',
       data
     }),
-  
-  getUserInfo: (accountNumber:string) =>
+
+  getUserInfo: (accountNumber: string) =>
     axios({
       url: `/customer/info/${accountNumber}`,
       method: 'get'
     }),
-  
-  registerUser: (data: any) => 
+
+  registerUser: (data: any) =>
     axios({
       url: `/register`,
       method: 'post',
       data
     }),
-  
+
   // 修改用户信息
   updateUser: (data: any) =>
     axios({
@@ -29,7 +29,7 @@ const user = {
       method: 'put',
       data
     }),
-  
+
   // 新增用户地址
   updateUserAddress: (data: any) =>
     axios({
@@ -37,13 +37,21 @@ const user = {
       method: 'post',
       data
     }),
-  
+
   // 查询用户地址
-  getUserAddress: (id:any) => 
+  getUserAddress: (id: any) =>
     axios({
       url: `/address/${id}`,
       method: 'get'
     }),
+
+  // 获取所有用户信息
+  getAllUsers: (data: any) =>
+    axios({
+      url: `/admin/getAllUsers`,
+      method: 'get',
+      data
+    })
 }
 
 export default user
