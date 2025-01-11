@@ -51,11 +51,15 @@ const bookContent = ref(props.bookinfo)
 
 const addToCart = async () => {
   try {
-    await api.cart.addToCart({
-      userId: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).userId : 0,
-      productId: bookContent.value.id,
-      quantity: 1
-    })
+    const order = {
+      bookinfo: bookContent.value,
+      quantity: 1,
+      total_price: bookContent.value.price,
+      purchaseTime: new Date().toISOString()
+    }
+    let charts = JSON.parse(localStorage.getItem('cart') || '[]')
+    charts.push(order)
+    localStorage.setItem('cart', JSON.stringify(charts))
     ElMessage({
       showClose: true,
       type: 'success',

@@ -42,6 +42,11 @@ const router = createRouter({
       path: '/manage',
       name: 'manage',
       component: () => import('../views/managePage/index.vue')
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: () => import('../views/chartPage/index.vue')
     }
   ]
 })

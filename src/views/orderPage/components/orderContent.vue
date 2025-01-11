@@ -24,14 +24,10 @@
             v-if="scope.row.status !== '已收货' && scope.row.status !== '已退货'"
             class="action-buttons"
           >
-            <template>
-              <el-button @click="initiateReturn(scope.row)" size="mini" type="danger"
-                >退货</el-button
-              >
-              <el-button @click="confirmReceipt(scope.row)" size="mini" style="margin-top: 5px"
-                >确认收货</el-button
-              >
-            </template>
+            <el-button @click="initiateReturn(scope.row)" size="mini" type="danger">退货</el-button>
+            <el-button @click="confirmReceipt(scope.row)" size="mini" style="margin-top: 5px"
+              >确认收货</el-button
+            >
           </div>
           <span v-else>已完成</span>
         </template>
