@@ -52,12 +52,12 @@ const api = useApi()
 const saveAddress = async () => {
   try {
     const response = await api.user.updateUserAddress({
-      customId: 1,
+      customId: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).customerId : '',
       location: location.value
     })
 
     console.log('地址添加成功', response)
-    emit('updateAddress', location.value)
+
     closeDialog()
   } catch (error) {
     console.log('地址添加失败', error)

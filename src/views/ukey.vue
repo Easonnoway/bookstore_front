@@ -1,6 +1,6 @@
 <template>
-  <div class="usb-key-status" :class="{ inserted: usbKeyInserted }">
-    {{ usbKeyInserted ? 'ukey已插入' : 'ukey未插入' }}
+  <div class="usb-key-status" @click="toggleSearch" :class="{ unresarch: !startSearch ,inserted: usbKeyInserted }">
+    {{!startSearch ? '点击开启ukey检测' : usbKeyInserted ? 'ukey已插入' : 'ukey未插入' }}
   </div>
 </template>
 
@@ -10,9 +10,11 @@ import { useApi } from '@/api' // 引入USB Key API
 
 const api = useApi()
 const usbKeyInserted = ref(false)
+const startSearch = ref(false)
 let timer: number
 
 const checkUsbKey = async () => {
+  if(!startSearch.value) return
   try {
     const response = await api.ukey.checkUsbKeyStatus()
     if (response.data.code === 9005) {
@@ -25,10 +27,15 @@ const checkUsbKey = async () => {
   }
 }
 
-onMounted(() => {
-  checkUsbKey()
-  timer = window.setInterval(checkUsbKey, 5000) // 每5秒检查一次USB Key状态
-})
+const toggleSearch = () => {
+  startSearch.value = !startSearch.value
+  if (startSearch.value) {
+    checkUsbKey()
+    timer = window.setInterval(checkUsbKey, 5000) // 每5秒检查一次USB Key状态
+  } else {
+    clearInterval(timer)
+  }
+}
 
 onUnmounted(() => {
   clearInterval(timer)
@@ -37,6 +44,7 @@ onUnmounted(() => {
 
 <style scoped>
 .usb-key-status {
+  cursor: pointer;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -57,6 +65,11 @@ onUnmounted(() => {
 
 .usb-key-status.inserted {
   background-color: green; /* 插入状态为绿色 */
+  transform: scale(1.1);
+}
+
+.usb-key-status.unresarch {
+  background-color: gray; 
   transform: scale(1.1);
 }
 </style>

@@ -25,7 +25,7 @@
     ></el-input>
   </div>
   <div class="user-container">
-    <span class="text-large font-600 mr-3"> Easonnoway </span>
+    <span class="text-large font-600 mr-3"> {{ accountNumber }} </span>
     <el-tag>用户</el-tag>
     <el-avatar
       class="mr-3"
@@ -42,6 +42,7 @@ import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 
+const accountNumber = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).accountNumber : ''
 const router = useRouter()
 const activeIndex = ref(
   location.href.endsWith('/')

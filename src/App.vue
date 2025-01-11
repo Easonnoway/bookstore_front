@@ -4,7 +4,7 @@ import UKey from './views/ukey.vue'
 </script>
 
 <template>
-  <RouterView />
+  <RouterView :key="$route.fullPath"/>
   <UKey />
 </template>
 

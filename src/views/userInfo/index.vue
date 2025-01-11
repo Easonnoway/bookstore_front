@@ -48,37 +48,45 @@
 <script setup>
 import editDialog from './components/editDialog.vue';
 import addAddressDialog from './components/addAddressDialog.vue';
-import { ref, onMounted, provide } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-// import { useApi } from '@/api'
+import { useApi } from '@/api'
 
 let editDialogVisible = ref(false);
 let addAddressDialogVisible = ref(false);
 const router = useRouter();
-
-function goToHomePage() {
-  router.push({ path: '/' });
-}
-
-function logout() {
-  router.push({ path: '/logIn' });
-}
-
-onMounted(() => {
-  eventBus.on('updateAddress', (data) => {
-    userInfo.value.addresses.push(data)
-  })
-})
+const api = useApi()
+const username = ref(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).accountNumber : '')
 
 const userInfo = ref({
-  username: 'Easonnoway',
-  customerType: '用户',
+  username: username.value,
+  customerType: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).identity : '',
   shoppingCart: 0,
   comments: 0,
   favorites: 0,
   bio: '这个人很懒，什么都没有留下。',
-  addresses: ['地址1', '地址2', '地址3']
+  addresses: []
 });
+
+function goToHomePage() {
+  router.push({ path: '/' });
+  
+}
+
+function logout() {
+  router.push({ path: '/logIn' });
+  localStorage.removeItem('user');
+}
+
+onMounted(async () => {
+  // eventBus.on('updateAddress', (data) => {
+  //   userInfo.value.addresses.push(data)
+  // })
+  const res = await api.user.getUserAddress(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).customerId : '');
+  userInfo.value.address = res.data.data
+})
+
+
 
 // function addAddress(address) {
 //   userInfo.value.addresses.push(address);

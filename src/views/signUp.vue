@@ -1,52 +1,74 @@
 <template>
   <div class="login-box">
-    <h2>Signup</h2>
-    <form @submit.prevent="signup">
+    <h2>注册</h2>
+    <form @submit.prevent="signUp">
+      <div style="margin-bottom: 20px;">
+        <el-radio-group v-model="identity">
+          <el-radio :label="1">用户</el-radio>
+          <el-radio :label="2">管理员</el-radio>
+          <el-radio :label="3">商户</el-radio>
+        </el-radio-group>
+      </div>
       <div class="user-box">
         <input type="text" v-model="accountNumber" required />
-        <label>Account Number</label>
+        <label>账号</label>
       </div>
       <div class="user-box">
         <input type="password" v-model="password" required />
-        <label>Password</label>
+        <label>密码</label>
       </div>
       <div class="user-box">
         <input type="text" v-model="phoneNumber" required />
-        <label>Phone</label>
+        <label>电话</label>
       </div>
       <div class="user-box">
         <input type="text" v-model="userName" required />
-        <label>Username</label>
+        <label>用户名</label>
       </div>
       <div class="user-box">
         <input type="email" v-model="email" required />
-        <label>Email</label>
+        <label>邮箱号</label>
       </div>
       <div class="button-container">
-        <el-button type="primary" @click="signup">注册</el-button>
+        <el-button type="primary" @click="signUp">注册</el-button>
       </div>
     </form>
-    <a @click="gotoLogin" style="cursor: pointer">go to login</a>
+    <a @click="gotoLogin" style="cursor: pointer">前往登录</a>
   </div>
+  <Vcode :show="isShow" @success="success" @close="close" @fail="fail" :imgs="[Img]"></Vcode>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useApi } from '@/api'
-
+import { ElMessage } from 'element-plus'
+import Vcode from 'vue3-puzzle-vcode'
+const isShow = ref(false)
 const router = useRouter()
 const accountNumber = ref('')
 const userName = ref('')
 const password = ref('')
 const phoneNumber = ref('')
 const email = ref('')
-// const profilePhoto = ref('')
-// const identity = ref('')
+const identity = ref(1) // 默认选择用户身份
 
 const api = useApi() // 使用自定义组合式函数获取全局API
 
-const signup = async () => {
+const success = (msg) => {
+  isShow.value = false
+  submitForm()
+}
+const fail = (msg) => {
+  ElMessage({
+    type: 'error',
+    message: '验证码错误，请重试'
+  })
+}
+const close = () => {
+  isShow.value = false
+}
+const submitForm = async () => {
   try {
     const response = await api.user.registerUser({
       accountNumber: accountNumber.value,
@@ -55,14 +77,25 @@ const signup = async () => {
       phoneNumber: phoneNumber.value,
       email: email.value,
       profilePhoto: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-      identity: 1
+      identity: identity.value
     })
+    if (response.code !== 200) {
+      console.error('注册失败:', response.data.data)
+      ElMessage({
+        type: 'error',
+        message: response.data.data
+      })
+      throw new Error(response)
+    }
     console.log('注册成功:', response)
     localStorage.setItem('user', JSON.stringify(response.data))
     router.push('/login') // 注册成功后跳转到登录页面
   } catch (error) {
     console.error('注册失败:', error)
   }
+}
+const signUp = () => {
+  isShow.value = true
 }
 
 const gotoLogin = () => {
@@ -149,5 +182,9 @@ html {
   transition: 0.5s;
   margin-top: 40px;
   letter-spacing: 4px;
+}
+
+.el-radio {
+  color: #fff;
 }
 </style>

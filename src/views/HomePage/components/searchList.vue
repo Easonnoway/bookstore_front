@@ -15,25 +15,38 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { defineProps } from 'vue'
 import { useApi } from '@/api'
+
+const api = useApi()
 const props = defineProps<{
   query: string
 }>()
 
-onMounted(async () => {
-  const res = await useApi().home.getSearchBooks({ keyword: props.query })
+const books = ref<any[]>([])
+
+const fetchSearchResults = async () => {
+  try {
+    const res = await api.home.getSearchBook({ keyword: props.query })
+    books.value = res.data.books
+  } catch (error) {
+    console.error('Error fetching search results:', error)
+  }
+}
+
+onMounted(() => {
+  fetchSearchResults()
 })
 
-const books = ref([
-  {
-    cover: 'https://example.com/book-cover.jpg',
-    author: '张梓延',
-    price: 100,
-    rate: 4.5
+watch(
+  () => props.query,
+  (newQuery) => {
+    if (newQuery) {
+      fetchSearchResults()
+    }
   }
-])
+)
 </script>
 
 <style lang="scss">

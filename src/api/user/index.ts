@@ -9,6 +9,12 @@ const user = {
       data
     }),
   
+  getUserInfo: (accountNumber:string) =>
+    axios({
+      url: `/customer/info/${accountNumber}`,
+      method: 'get'
+    }),
+  
   registerUser: (data: any) => 
     axios({
       url: `/register`,
@@ -30,7 +36,14 @@ const user = {
       url: `/customer/address`,
       method: 'post',
       data
-    })
+    }),
+  
+  // 查询用户地址
+  getUserAddress: (id:any) => 
+    axios({
+      url: `/address/${id}`,
+      method: 'get'
+    }),
 }
 
 export default user

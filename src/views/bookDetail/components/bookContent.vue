@@ -10,7 +10,7 @@
         <p class="book-price">价格：{{ bookContent.price }}元</p>
         <el-rate class="book-rate" v-model="bookContent.rate" disabled></el-rate>
         <br />
-        <el-button>购买</el-button>
+        <el-button @click="addOrder">购买</el-button>
         <el-button>加入购物车</el-button>
         <br /><br />
         <p style="font-weight: bold; margin-bottom: 20px">
@@ -38,6 +38,9 @@ import relatedList from './relatedList.vue'
 import commentArea from './commentArea.vue'
 import { onMounted } from 'vue'
 import router from '@/router'
+import { useApi } from '@/api'
+
+const api = useApi()
 
 const bookContent = ref({
   imgSrc: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
@@ -48,10 +51,18 @@ const bookContent = ref({
   freeNumber: 999
 })
 
+const addOrder = async () => {
+  await api.order.addOrder({
+    customerId: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).userId : 0,
+    productId: 1001,
+    quantity: 1,
+    total_price: 200.0
+  })
+}
+
 const gotoStroe = () => {
   router.push('/bookstore')
 }
-
 </script>
 
 <style scoped>
