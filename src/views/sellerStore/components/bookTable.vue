@@ -9,7 +9,7 @@
       <el-table-column prop="name" label="书籍名字" width="200"></el-table-column>
       <el-table-column prop="author" label="作者"></el-table-column>
       <el-table-column prop="price" label="价格"></el-table-column>
-      <el-table-column prop="stock" label="库存量"></el-table-column>
+      <el-table-column prop="freeNumber" label="库存量"></el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
           <el-button @click="handleEdit(scope.row)" type="primary" size="small">修改信息</el-button>
@@ -71,6 +71,10 @@ interface Book {
   description: string
 }
 
+const props = defineProps<{
+  bookInfoList: any
+}>()
+
 onMounted(async () => {
   // try {
   //   const response = await api.store.getBooks()
@@ -97,25 +101,7 @@ const changeBookInfo = async (book: Book) => {
   }
 }
 
-const books = reactive<Book[]>([
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    name: '书籍1',
-    author: '作者1',
-    price: 100,
-    stock: 10,
-    description: '介绍1'
-  },
-  {
-    cover: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-    name: '书籍2',
-    author: '作者2',
-    price: 200,
-    stock: 20,
-    description: '介绍2'
-  }
-  // 更多书籍数据
-])
+const books = ref(props.bookInfoList)
 
 const dialogVisible = ref(false)
 const editBook = reactive<Book>({

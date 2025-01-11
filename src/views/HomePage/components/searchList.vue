@@ -5,6 +5,7 @@
       <el-col :span="3" v-for="(book, index) in books" :key="index">
         <img :src="book.cover" alt="Book Cover" class="book-cover" />
         <div class="book-info">
+          <p class="book-author" style="font-weight: 600">{{ book.name }}</p>
           <p class="book-author">{{ book.author }}</p>
           <p class="book-price" style="color: red">{{ book.price }}</p>
           <el-rate v-model="book.rate" disabled></el-rate>
@@ -18,18 +19,19 @@
 import { onMounted, ref, watch } from 'vue'
 import { defineProps } from 'vue'
 import { useApi } from '@/api'
+import allbooks from '@/assets/books.json'
 
 const api = useApi()
 const props = defineProps<{
   query: string
 }>()
 
-const books = ref<any[]>([])
+const books = allbooks.filter((book: any) => book.name.includes(props.query))
 
 const fetchSearchResults = async () => {
   try {
     const res = await api.home.getSearchBook({ keyword: props.query })
-    books.value = res.data.books
+    books.values = res.data.books
   } catch (error) {
     console.error('Error fetching search results:', error)
   }

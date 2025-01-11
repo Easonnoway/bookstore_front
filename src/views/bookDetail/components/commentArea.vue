@@ -90,73 +90,74 @@ const myHeader = ref('path/to/my/header.jpg')
 const btnShow = ref(false)
 const index = ref(0)
 const replyComment = ref('')
-const myName = ref('Lana Del Rey')
-const myId = ref(19870621)
+const myName = ref('张三')
+const myId = ref(1001)
 const to = ref('')
 const toId = ref(-1)
 
 const comments = reactive([
   {
-    name: 'Lana Del Rey',
-    id: 19870621,
-    comment: '我发布一张新专辑Norman Fucking Rockwell,大家快来听啊',
-    time: '2019年9月16日 18:43',
-    commentNum: 2,
-    like: 15,
+    name: 'Lis',
+    id: 1002,
+    comment: '这本书的情节非常吸引人，期待作者的下一部作品。',
+    time: '2024年4月20日 10:30',
+    commentNum: 3,
+    like: 20,
     inputShow: false,
     reply: [
       {
-        from: 'Taylor Swift',
-        fromId: 19891221,
-        to: 'Lana Del Rey',
-        toId: 19870621,
-        comment: '我很喜欢你的新专辑！！',
-        time: '2019年9月16日 18:43',
+        from: '梦之泪伤',
+        fromId: 1003,
+        to: 'Lis',
+        toId: 1002,
+        comment: '确实如此，作者的文笔非常细腻。',
+        time: '2024年4月20日 11:00',
         commentNum: 1,
-        like: 15,
+        like: 5,
         inputShow: false
       },
       {
-        from: 'Ariana Grande',
-        fromId: 1123,
-        to: 'Lana Del Rey',
-        toId: 19870621,
-        comment: '别忘记宣传我们的合作单曲啊',
-        time: '2019年9月16日 18:43',
+        from: '赵QAQ',
+        fromId: 1004,
+        to: 'Lis',
+        toId: 1002,
+        comment: '我也觉得这本书很棒，推荐给大家。',
+        time: '2024年4月20日 12:15',
         commentNum: 0,
-        like: 5,
+        like: 3,
         inputShow: false
       }
     ]
   },
   {
-    name: 'Taylor Swift',
-    id: 19891221,
-    time: '2019年9月16日 18:43',
-    commentNum: 1,
-    like: 5,
+    name: '王五',
+    id: 1003,
+    time: '2024年4月21日 09:45',
+    comment: '人生必看。',
+    commentNum: 2,
+    like: 10,
     inputShow: false,
     reply: [
       {
-        from: 'Lana Del Rey',
-        fromId: 19870621,
-        to: 'Taylor Swift',
-        toId: 19891221,
-        comment: '新专辑和speak now 一样棒！',
-        time: '2019年9月16日 18:43',
-        commentNum: 25,
-        like: 5,
+        from: 'UESTC大天才',
+        fromId: 1001,
+        to: '王五',
+        toId: 1003,
+        comment: '感谢推荐，我会去看看的。',
+        time: '2024年4月21日 10:00',
+        commentNum: 0,
+        like: 2,
         inputShow: false
       }
     ]
   },
   {
-    name: 'Norman Fucking Rockwell',
-    id: 20190830,
-    comment: 'Plz buy Norman Fucking Rockwell on everywhere',
-    time: '2019年9月16日 18:43',
-    commentNum: 0,
-    like: 5,
+    name: '不当人',
+    id: 1004,
+    comment: '这本书的主题非常深刻，引人深思。',
+    time: '2024年4月22日 14:20',
+    commentNum: 1,
+    like: 8,
     inputShow: false,
     reply: []
   }
@@ -197,7 +198,7 @@ const _inputShow = (i: number) => {
 }
 
 const sendComment = () => {
-  if (!replyComment.value) {
+  if (!replyComment.value.trim()) {
     ElMessage({
       showClose: true,
       type: 'warning',
@@ -223,7 +224,7 @@ const sendComment = () => {
 }
 
 const sendCommentReply = (i: number, j: number) => {
-  if (!replyComment.value) {
+  if (!replyComment.value.trim()) {
     ElMessage({
       showClose: true,
       type: 'warning',

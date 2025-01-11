@@ -9,15 +9,16 @@
   <div class="book-list-container">
     <p style="font-size: 22px; font-weight: bold; margin-bottom: 5px">为你推荐：</p>
     <el-row :gutter="24">
-      <el-col :span="4" v-for="(book, index) in books" :key="index">
+      <el-col :span="6" v-for="(book, index) in books" :key="index">
         <img
           style="cursor: pointer"
-          @click="gotoDetail"
+          @click="gotoDetail(book.id)"
           :src="book.cover"
           alt="Book Cover"
           class="book-cover"
         />
         <div class="book-info">
+          <p class="book-author" style="font-weight: 600">{{ book.name }}</p>
           <p class="book-author">{{ book.author }}</p>
           <p class="book-price" style="color: red">{{ book.price }}</p>
           <el-rate v-model="book.rate" disabled></el-rate>
@@ -31,6 +32,7 @@
 import { ref, onMounted } from 'vue'
 import router from '@/router'
 import { useApi } from '@/api'
+import books from '@/assets/books.json' // 直接导入 JSON 数据
 
 const api = useApi()
 
@@ -40,21 +42,20 @@ const carouselItems = ref<string[]>([
   'https://img62.ddimg.cn/picc/24PCx675x1125xMSK.jpg',
   'https://img60.ddimg.cn/picc/24PCx675x1125xMW.jpg'
 ])
-const books = ref<any[]>([])
 
 onMounted(async () => {
   try {
     const response = await api.home.getRecommendBook()
-    books.value = response.data.books
+    books.values = response.data.books
   } catch (error) {
     console.error('Error fetching data:', error)
   }
 })
 
-const gotoDetail = () => {
+const gotoDetail = (id: any) => {
   router.push({
-    path: '/bookdetail'
-    // query: { bookId: 1 }
+    path: '/bookdetail',
+    query: { bookid:id }
   })
 }
 </script>

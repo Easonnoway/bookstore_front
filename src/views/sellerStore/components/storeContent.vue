@@ -13,8 +13,8 @@
     </div>
   </div>
   <div class="book-list">
-    <book-list v-if="iscoustomer" />
-    <book-table v-else />
+    <book-list v-if="iscoustomer" :bookInfoList="bookInfoList" />
+    <book-table v-else :bookInfoList="bookInfoList"/>
   </div>
 </template>
 
@@ -23,6 +23,8 @@ import { ref,onMounted } from 'vue'
 import bookList from './bookList.vue'
 import bookTable from './bookTable.vue'
 import { useApi } from '@/api'
+import books from '@/assets/books.json'
+const bookInfoList = books.filter((book: any) => book.storeId === 'store123')
 const api = useApi()
 const iscoustomer = ref(false)
 const store = ref({

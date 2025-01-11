@@ -9,24 +9,34 @@
       </template>
       <template #content>
         <span style="color: #65676b; font-weight: 600" class="text-large font-600 mr-3">
-          生命中所有的灿烂都将用寂寞来偿还
+          {{ bookinfo?.name || '' }}
         </span>
       </template>
     </el-page-header>
   </div>
   <div class="book-detail-container">
-    <book-content />
+    <book-content :bookinfo="bookinfo"/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import router from '@/router'
 import bookContent from './components/bookContent.vue'
+import books from '@/assets/books.json' // 直接导入 JSON 数据
+const route = router.currentRoute
+const bookId = ref(route.value.query.bookid)
+const bookinfo = ref(books.find(book => book.id === bookId.value))
 
 const goBack = () => {
   router.go(-1)
 }
+
+onMounted(() => {
+  // 确保页面滚动到顶部
+  window.scrollTo(0, 0)
+})
+
 </script>
 
 <style scoped>

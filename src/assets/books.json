@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "cover": "https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg",
+    "name": "生命中所有的灿烂都将用寂寞来偿还",
+    "author": "徐东著",
+    "price": 100,
+    "rate": 4,
+    "freeNumber": 999,
+    "description": "《生命中所有的灿烂都将用寂寞来偿还》是作者徐东著的一部小说作品，小说主要讲述了......",
+    "store": "张梓延的店铺",
+    "storeId": "store123"
+  },
+  {
+    "id": "2",
+    "cover": "https://img3m8.ddimg.cn/73/8/29211508-3_u_16.jpg",
+    "name": "追风筝的人",
+    "author": "卡勒德·胡赛尼",
+    "price": 80,
+    "rate": 5,
+    "freeNumber": 500,
+    "description": "《追风筝的人》讲述了一个关于友情与救赎的动人故事，背景设定在阿富汗......",
+    "store": "李四的书店",
+    "storeId": "store456"
+  },
+  {
+    "id": "3",
+    "cover": "https://img3m0.ddimg.cn/4/34/1901076610-1_b_4.jpg",
+    "name": "百年孤独",
+    "author": "加布里埃尔·加西亚·马尔克斯",
+    "price": 120,
+    "rate": 5,
+    "freeNumber": 300,
+    "description": "《百年孤独》是拉丁美洲魔幻现实主义的代表作，讲述了布恩迪亚家族七代人的传奇故事......",
+    "store": "王五的文学天地",
+    "storeId": "store789"
+  },
+  {
+    "id": "4",
+    "cover": "https://img3m1.ddimg.cn/75/26/29117361-1_w_11.jpg",
+    "name": "解忧杂货店",
+    "author": "东野圭吾",
+    "price": 90,
+    "rate": 5,
+    "freeNumber": 450,
+    "description": "《解忧杂货店》通过一个神秘的杂货店，讲述了人与人之间温暖的故事，探讨了成长与救赎的主题......",
+    "store": "刘德华的书房",
+    "storeId": "store101"
+  },
+  {
+    "id": "5",
+    "cover": "https://img3m4.ddimg.cn/32/35/23579654-1_b_6.jpg",
+    "name": "三体",
+    "author": "刘慈欣",
+    "price": 150,
+    "rate": 5,
+    "freeNumber": 200,
+    "description": "《三体》是刘慈欣的代表作，融合了科学、哲学与人文，描绘了人类与外星文明的首次接触......",
+    "store": "科技之光书店",
+    "storeId": "store102"
+  },
+  {
+    "id": "6",
+    "cover": "https://img3m8.ddimg.cn/76/16/29300908-1_b_6.jpg",
+    "name": "无声告白",
+    "author": "伍绮诗",
+    "price": 110,
+    "rate": 4,
+    "freeNumber": 350,
+    "description": "《无声告白》通过多个视角展示了一个家庭的秘密与矛盾，深刻剖析了现代家庭关系......",
+    "store": "楚门书屋",
+    "storeId": "store103"
+  },
+  {
+    "id": "7",
+    "cover": "https://img3m0.ddimg.cn/59/31/28522850-1_b_1701666255.jpg",
+    "name": "霍乱时期的爱情",
+    "author": "加布里埃尔·加西亚·马尔克斯",
+    "price": 95,
+    "rate": 5,
+    "freeNumber": 400,
+    "description": "《霍乱时期的爱情》描述了一段跨越半个世纪的爱情故事，探讨了爱情的持久与变化......",
+    "store": "马尔克斯文学坊",
+    "storeId": "store104"
+  },
+  {
+    "id": "8",
+    "cover": "https://img3m7.ddimg.cn/29/19/29396297-1_b_4.jpg",
+    "name": "嫌疑人X的献身",
+    "author": "东野圭吾",
+    "price": 85,
+    "rate": 5,
+    "freeNumber": 600,
+    "description": "《嫌疑人X的献身》是一部推理小说，讲述了天才数学家为了保护心爱之人，不惜一切代价的故事......",
+    "store": "推理迷之家",
+    "storeId": "store105"
+  },
+  {
+    "id": "9",
+    "cover": "https://img3m9.ddimg.cn/75/6/25067469-1_b_34.jpg",
+    "name": "小王子",
+    "author": "安托万·德·圣埃克苏佩里",
+    "price": 70,
+    "rate": 5,
+    "freeNumber": 800,
+    "description": "《小王子》通过一个孩子的眼睛，探讨了爱、友谊与生命的意义，是一部深具哲理和温情的文学作品......",
+    "store": "童心书屋",
+    "storeId": "store106"
+  },
+  {
+    "id": "10",
+    "cover": "https://img3m3.ddimg.cn/23/25/29311943-1_b_34.jpg",
+    "name": "活着",
+    "author": "余华",
+    "price": 90,
+    "rate": 5,
+    "freeNumber": 700,
+    "description": "《活着》讲述了一个普通农民在中国现代史上的悲欢离合，展现了人性的顽强与生活的无奈......",
+    "store": "余华文学角",
+    "storeId": "store107"
+  }
+]

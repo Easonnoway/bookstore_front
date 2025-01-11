@@ -8,9 +8,8 @@
     >
       <el-menu-item index="1" @click="router.push('/')">主页</el-menu-item>
       <el-sub-menu index="2">
-        <template #title>操作</template>
+        <template #title>非用户操作</template>
         <el-menu-item @click="router.push('/bookstore')">我的商铺</el-menu-item>
-        <el-menu-item @click="router.push('/storemanage')">店铺管理页面</el-menu-item>
         <el-menu-item @click="router.push('/manage')">管理员页面</el-menu-item>
       </el-sub-menu>
       <el-menu-item index="3" @click="handleOrderClick">订单</el-menu-item>
@@ -19,7 +18,7 @@
   <div class="search-container">
     <el-input
       v-model="searchQuery"
-      placeholder="搜索"
+      placeholder="回车搜索"
       :suffix-icon="Search"
       @keyup.enter="handleSearch"
     ></el-input>

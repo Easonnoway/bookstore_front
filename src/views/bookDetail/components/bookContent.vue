@@ -2,7 +2,7 @@
   <div class="book-content-container">
     <div class="book-content">
       <div class="book-cover">
-        <img :src="bookContent.imgSrc" alt="Book Cover" />
+        <img :src="bookContent.cover" alt="Book Cover" />
       </div>
       <div class="book-info">
         <h1 class="book-title">{{ bookContent.name }}</h1>
@@ -10,11 +10,11 @@
         <p class="book-price">价格：{{ bookContent.price }}元</p>
         <el-rate class="book-rate" v-model="bookContent.rate" disabled></el-rate>
         <br />
-        <el-button @click="addOrder">购买</el-button>
-        <el-button>加入购物车</el-button>
+        <el-button @click="confirmPurchase" type="primary">购买</el-button>
+        <el-button @click="addToCart" type="success">加入购物车</el-button>
         <br /><br />
         <p style="font-weight: bold; margin-bottom: 20px">
-          店铺：<a style="cursor: pointer" @click="gotoStroe">张梓延的店铺</a>
+          店铺：<a style="cursor: pointer" @click="gotoStore">{{ bookContent.store }}</a>
         </p>
         <p class="book-number">该店铺库存量：{{ bookContent.freeNumber }}</p>
       </div>
@@ -22,7 +22,7 @@
     <div class="book-description">
       <h3>书籍简介:</h3>
       <p>
-        《生命中所有的灿烂都将用寂寞来偿还》是作者Easonnoway的一部小说作品，小说主要讲述了......
+        {{ bookContent.description }}
       </p>
       <h3>相关评价:</h3>
       <comment-area />
@@ -34,34 +34,81 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import relatedList from './relatedList.vue'
 import commentArea from './commentArea.vue'
-import { onMounted } from 'vue'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 import { useApi } from '@/api'
 
+const router = useRouter()
 const api = useApi()
 
-const bookContent = ref({
-  imgSrc: 'https://img3m6.ddimg.cn/92/12/29785826-1_l_1727065698.jpg',
-  name: '生命中所有的灿烂都将用寂寞来偿还',
-  author: 'Easonnoway',
-  price: 100,
-  rate: 4,
-  freeNumber: 999
-})
+const props = defineProps<{
+  bookinfo: any
+}>()
+
+const bookContent = ref(props.bookinfo)
+
+const addToCart = async () => {
+  try {
+    await api.cart.addToCart({
+      userId: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).userId : 0,
+      productId: bookContent.value.id,
+      quantity: 1
+    })
+    ElMessage({
+      showClose: true,
+      type: 'success',
+      message: '已加入购物车'
+    })
+  } catch (error) {
+    ElMessage({
+      showClose: true,
+      type: 'error',
+      message: '加入购物车失败'
+    })
+  }
+}
+
+const confirmPurchase = () => {
+  ElMessageBox.confirm('确认要购买这本书吗？', '购买确认', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {
+      addOrder()
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '已取消购买'
+      })
+    })
+}
 
 const addOrder = async () => {
-  await api.order.addOrder({
-    customerId: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).userId : 0,
-    productId: 1001,
+  const order = {
+    bookinfo: bookContent.value,
     quantity: 1,
-    total_price: 200.0
+    total_price: bookContent.value.price,
+    purchaseTime: new Date().toISOString()
+  }
+  let purchases = JSON.parse(localStorage.getItem('purchases') || '[]')
+  purchases.push(order)
+  localStorage.setItem('purchases', JSON.stringify(purchases))
+
+  ElMessage({
+    showClose: true,
+    type: 'success',
+    message: '购买成功'
   })
 }
 
-const gotoStroe = () => {
-  router.push('/bookstore')
+const gotoStore = () => {
+  router.push({
+    path: `/bookstore/${bookContent.value.storeId}`
+  })
 }
 </script>
 
